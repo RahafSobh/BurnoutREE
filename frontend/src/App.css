@@ -133,3 +133,20 @@ pre {
       grid-template-columns: 1fr;
   }
 }
+.error-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+}
+.tree-flow-wrapper {
+  width: 100%;
+  height: 560px;
+  min-height: 560px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8fbff;
+}

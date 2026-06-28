@@ -5,8 +5,20 @@ import {
   getSerializedTree,
 } from '../services/treeService.js';
 import type { TrainingRecord } from '../models/tree.js';
+import {
+  validatePredictionInput,
+  validateTrainingRecords,
+} from '../utils/validation.js';
 
 export function train(req: Request, res: Response) {
+  const validationError = validateTrainingRecords(req.body);
+
+  if (validationError) {
+    return res.status(400).json({
+      error: validationError,
+    });
+  }
+
   try {
     const records = req.body as TrainingRecord[];
 
@@ -17,13 +29,21 @@ export function train(req: Request, res: Response) {
       tree,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       error: error instanceof Error ? error.message : 'Training failed.',
     });
   }
 }
 
 export function predict(req: Request, res: Response) {
+  const validationError = validatePredictionInput(req.body);
+
+  if (validationError) {
+    return res.status(400).json({
+      error: validationError,
+    });
+  }
+
   try {
     const result = predictWithModel(req.body);
 
@@ -35,7 +55,7 @@ export function predict(req: Request, res: Response) {
   }
 }
 
-export function getTree(_req: Request, res: Response)  {
+export function getTree(_req: Request, res: Response) {
   const tree = getSerializedTree();
 
   if (!tree) {

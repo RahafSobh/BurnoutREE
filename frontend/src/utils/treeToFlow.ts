@@ -57,7 +57,10 @@ function getNodeColors(node: SerializedTreeNode) {
   }
 }
 
-export function convertTreeToFlow(tree: SerializedTreeNode): FlowResult {
+export function convertTreeToFlow(
+    tree: SerializedTreeNode,
+    highlightedPath: string[] = []
+  ): FlowResult{
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
@@ -72,6 +75,9 @@ export function convertTreeToFlow(tree: SerializedTreeNode): FlowResult {
     const y = depth * 150;
 
     const colors = getNodeColors(node);
+    const isHighlighted = highlightedPath.some((step) =>
+        step.startsWith(node.label)
+      );
 
     nodes.push({
       id: node.id,
@@ -88,8 +94,13 @@ export function convertTreeToFlow(tree: SerializedTreeNode): FlowResult {
       style: {
         borderRadius: 14,
         padding: 12,
-        border: `2px solid ${colors.border}`,
+        border: isHighlighted
+        ? '4px solid #2563eb'
+        : `2px solid ${colors.border}`,
         background: colors.background,
+        boxShadow: isHighlighted
+         ? '0 0 20px rgba(37,99,235,0.45)'
+         : undefined,
         minWidth: 170,
         textAlign: 'center',
       },
