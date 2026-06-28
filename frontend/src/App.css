@@ -1,18 +1,135 @@
-.app {
+:root {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: #17324d;
+  background: #f4fbf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, #dff7ec, transparent 30%),
+    linear-gradient(135deg, #f7fcfb, #eef8ff);
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  margin-top: 0;
+  color: #1d4e5f;
+}
+
+p {
+  color: #5f7485;
+}
+
+form,
+section {
+  background: white;
+  border: 1px solid #dceee8;
+  border-radius: 18px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: 0 12px 30px rgba(27, 83, 91, 0.08);
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: end;
+}
+
+form h2 {
+  grid-column: 1 / -1;
+}
+
+label {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #23485a;
 }
 
-.app h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2rem;
+input,
+select {
+  padding: 11px 12px;
+  border: 1px solid #b9d8d2;
+  border-radius: 10px;
+  font-size: 15px;
 }
 
-.app p {
-  margin: 0;
-  color: #64748b;
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2e9f75, #2476a8);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+h3 {
+  font-size: 30px;
+  color: #2e9f75;
+  margin: 8px 0 16px;
+}
+
+ol {
+  padding-left: 22px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+pre {
+  max-height: 420px;
+  overflow: auto;
+  background: #102a3a;
+  color: #dff7ec;
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+}
+.top-section {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .top-section {
+      grid-template-columns: 1fr;
+  }
 }
