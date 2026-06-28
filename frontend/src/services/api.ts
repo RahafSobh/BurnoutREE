@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://burnoutree.onrender.com/api';
 
 export async function trainModel(records: unknown[]) {
   const response = await fetch(`${API_URL}/train`, {
