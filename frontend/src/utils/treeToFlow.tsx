@@ -83,14 +83,21 @@ export function convertTreeToFlow(
       id: node.id,
       position: { x, y },
       data: {
-        label: node.label,
+        label: (
+          <div title={`Samples: ${node.samples}
+      Entropy: ${node.entropy.toFixed(3)}
+      Information Gain: ${node.informationGain?.toFixed(3) ?? 'N/A'}
+      ${node.prediction ? `Prediction: ${node.prediction}` : ''}`}>
+            {node.label}
+          </div>
+        ),
         samples: node.samples,
         entropy: node.entropy,
         informationGain: node.informationGain,
         prediction: node.prediction,
         type: node.type,
       },
-      type: 'default',
+      type: 'defult',
       style: {
         borderRadius: 14,
         padding: 12,
