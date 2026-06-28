@@ -31,16 +31,19 @@ export default function PredictionForm({ onPredict }: PredictionFormProps) {
 
   const [error, setError] = useState<string | null>(null);
 
-  function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const { name, value } = event.target;
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value, type, checked } = event.target;
 
     setError(null);
 
     setFormData((previous) => ({
       ...previous,
-      [name]: name === 'weekends' ? value : Number(value),
+      [name]:
+        type === 'checkbox'
+          ? checked
+            ? 'Yes'
+            : 'No'
+          : Number(value),
     }));
   }
 
@@ -64,9 +67,9 @@ export default function PredictionForm({ onPredict }: PredictionFormProps) {
       {error && <p className="error-message">{error}</p>}
 
       <label>
-        Sleep
+        Sleep: {formData.sleep} hours
         <input
-          type="number"
+          type="range"
           name="sleep"
           min={0}
           max={24}
@@ -77,9 +80,9 @@ export default function PredictionForm({ onPredict }: PredictionFormProps) {
       </label>
 
       <label>
-        Meetings
+        Meetings: {formData.meetings} per day
         <input
-          type="number"
+          type="range"
           name="meetings"
           min={0}
           max={20}
@@ -90,9 +93,9 @@ export default function PredictionForm({ onPredict }: PredictionFormProps) {
       </label>
 
       <label>
-        Stress
+        Stress: {formData.stress}/10
         <input
-          type="number"
+          type="range"
           name="stress"
           min={1}
           max={10}
@@ -102,17 +105,14 @@ export default function PredictionForm({ onPredict }: PredictionFormProps) {
         />
       </label>
 
-      <label>
-        Weekends
-        <select
+      <label className="checkbox-label">
+        <input
+          type="checkbox"
           name="weekends"
-          required
-          value={formData.weekends}
+          checked={formData.weekends === 'Yes'}
           onChange={handleChange}
-        >
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
+        />
+        Works on weekends
       </label>
 
       <button type="submit">Predict Burnout</button>
