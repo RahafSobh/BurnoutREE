@@ -2,8 +2,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+function cleanEnv(value: string | undefined, fallback: string) {
+  return (value ?? fallback).trim().replace(/^"|"$/g, '');
+}
+
 export const config = {
   port: Number(process.env.PORT) || 3000,
-  nodeEnv: process.env.NODE_ENV || 'development',
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:5173',
-} as const;
+  corsOrigin: cleanEnv(
+    process.env.CORS_ORIGIN,
+    'http://localhost:5173'
+  ),
+};
