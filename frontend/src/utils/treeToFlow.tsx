@@ -97,7 +97,7 @@ export function convertTreeToFlow(
         prediction: node.prediction,
         type: node.type,
       },
-      type: 'defult',
+      type: 'default',
       style: {
         borderRadius: 14,
         padding: 12,
